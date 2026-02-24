@@ -9,7 +9,6 @@ test.describe('Checkout', () => {
     await app.login.loginAs(users.standard);
     await app.products.assertLoaded();
     
-    // Common setup: add item, go to cart, start checkout
     await app.products.addToCart(products.sauceLabsBackpack);
     await app.products.goToCart();
     await app.cart.proceedToCheckout();
