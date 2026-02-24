@@ -1,0 +1,46 @@
+export type Product = {
+  name: string;
+  slug: string;
+  price: string;
+};
+
+type ProductKey = 
+  | 'sauceLabsBackpack'
+  | 'sauceLabsBikeLight'
+  | 'sauceLabsBoltTShirt'
+  | 'sauceLabsFleeceJacket'
+  | 'sauceLabsOnesie'
+  | 'testAllTheThingsTShirt';
+
+export const products: Record<ProductKey, Product> = {
+  sauceLabsBackpack: {
+    name: 'Sauce Labs Backpack',
+    slug: 'sauce-labs-backpack',
+    price: '$29.99'
+  },
+  sauceLabsBikeLight: {
+    name: 'Sauce Labs Bike Light',
+    slug: 'sauce-labs-bike-light',
+    price: '$9.99'
+  },
+  sauceLabsBoltTShirt: {
+    name: 'Sauce Labs Bolt T-Shirt',
+    slug: 'sauce-labs-bolt-t-shirt',
+    price: '$15.99'
+  },
+  sauceLabsFleeceJacket: {
+    name: 'Sauce Labs Fleece Jacket',
+    slug: 'sauce-labs-fleece-jacket',
+    price: '$49.99'
+  },
+  sauceLabsOnesie: {
+    name: 'Sauce Labs Onesie',
+    slug: 'sauce-labs-onesie',
+    price: '$7.99'
+  },
+  testAllTheThingsTShirt: {
+    name: 'Test.allTheThings() T-Shirt (Red)',
+    slug: 'test.allthethings()-t-shirt-(red)',
+    price: '$15.99'
+  }
+};
