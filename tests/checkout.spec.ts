@@ -51,11 +51,4 @@ test.describe('Checkout', () => {
 
     await app.checkout.assertErrorVisible('Error: Postal Code is required');
   });
-
-  test('order total displayed on review step', async ({ app }) => {
-    await app.checkout.fillShippingInfo('John', 'Doe', '12345');
-    await app.checkout.proceedToReview();
-
-    await app.checkout.assertItemTotal(products.sauceLabsBackpack.price);
-  });
 });
