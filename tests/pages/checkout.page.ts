@@ -1,7 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 
 export class CheckoutPage {
-  // Only expose locators used in tests or multiple methods
   readonly continueButton: Locator;
 
   constructor(private page: Page) {
