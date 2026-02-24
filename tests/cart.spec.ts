@@ -27,6 +27,9 @@ test.describe('Cart', () => {
     
     await app.cart.assertLoaded();
     await app.cart.assertItemCount(3);
+    
+    // Use soft assertions to check all items in one go
+    await expect.soft(app.cart['page'].getByTestId('inventory-item')).toHaveCount(3);
     await app.cart.assertItemInCart('Sauce Labs Backpack');
     await app.cart.assertItemInCart('Sauce Labs Bike Light');
     await app.cart.assertItemInCart('Sauce Labs Bolt T-Shirt');
@@ -41,9 +44,8 @@ test.describe('Cart', () => {
     await app.cart.removeItem('Sauce Labs Backpack');
     
     await app.cart.assertItemCount(1);
-    const names = await app.cart.getItemNames();
-    expect(names).not.toContain('Sauce Labs Backpack');
-    expect(names).toContain('Sauce Labs Bike Light');
+    await app.cart.assertItemNotInCart('Sauce Labs Backpack');
+    await app.cart.assertItemInCart('Sauce Labs Bike Light');
   });
 
   test('remove all items from cart', async ({ app }) => {
@@ -78,11 +80,11 @@ test.describe('Cart', () => {
     await app.products.assertLoaded();
   });
 
-  test('click checkout navigates to checkout page', async ({ app, page }) => {
+  test('click checkout navigates to checkout page', async ({ app }) => {
     await app.products.addToCart('Sauce Labs Backpack');
     await app.products.goToCart();
     
     await app.cart.clickCheckout();
-    await expect(page).toHaveURL(/checkout-step-one/);
+    await app.cart.assertCheckoutPage();
   });
 });

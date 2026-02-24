@@ -34,11 +34,11 @@ export class CartPage {
   }
 
   async clickCheckout() {
-    await this.page.getByTestId('checkout').click();
+    await this.page.getByRole('button', { name: 'Checkout' }).click();
   }
 
   async clickContinueShopping() {
-    await this.page.getByTestId('continue-shopping').click();
+    await this.page.getByRole('button', { name: 'Go back' }).click();
   }
 
   async assertLoaded() {
@@ -47,17 +47,28 @@ export class CartPage {
   }
 
   async assertItemInCart(productName: string) {
-    const names = await this.getItemNames();
-    expect(names).toContain(productName);
+    const item = this.page.getByTestId('inventory-item').filter({
+      has: this.page.getByTestId('inventory-item-name').filter({ hasText: productName })
+    });
+    await expect(item).toBeVisible();
+  }
+
+  async assertItemNotInCart(productName: string) {
+    const item = this.page.getByTestId('inventory-item').filter({
+      has: this.page.getByTestId('inventory-item-name').filter({ hasText: productName })
+    });
+    await expect(item).toHaveCount(0);
   }
 
   async assertCartEmpty() {
-    const count = await this.getItemCount();
-    expect(count).toBe(0);
+    await expect(this.page.getByTestId('inventory-item')).toHaveCount(0);
   }
 
   async assertItemCount(expected: number) {
-    const count = await this.getItemCount();
-    expect(count).toBe(expected);
+    await expect(this.page.getByTestId('inventory-item')).toHaveCount(expected);
+  }
+
+  async assertCheckoutPage() {
+    await expect(this.page).toHaveURL(/checkout-step-one/);
   }
 }
