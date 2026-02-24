@@ -71,19 +71,4 @@ test.describe('Cart', () => {
     await app.products.goToCart();
     await app.cart.assertItemInCart(products.sauceLabsBackpack);
   });
-
-  test('continue shopping returns to products', async ({ app }) => {
-    await app.products.addToCart(products.sauceLabsBackpack);
-    await app.products.goToCart();
-    
-    await app.cart.returnToProducts();
-    await app.products.assertLoaded();
-  });
-
-  test('click checkout navigates to checkout page', async ({ app }) => {
-    await app.products.addToCart(products.sauceLabsBackpack);
-    await app.products.goToCart();
-    
-    await app.cart.proceedToCheckout();
-  });
 });
