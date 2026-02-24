@@ -3,11 +3,15 @@ export type User = {
   password: string;
 };
 
-type UserRole = 'standard';
+type UserRole = 'standard' | 'locked';
 
 export const users: Record<UserRole, User> = {
   standard: {
     username: 'standard_user',
+    password: 'secret_sauce'
+  },
+  locked: {
+    username: 'locked_out_user',
     password: 'secret_sauce'
   }
 };
