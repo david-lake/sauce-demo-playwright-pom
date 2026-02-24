@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+import type { Product } from '@data/products';
 
 export class ProductsPage {
   constructor(private page: Page) {}
@@ -8,14 +9,12 @@ export class ProductsPage {
     await expect(this.page.getByTestId('title')).toHaveText('Products');
   }
 
-  async addToCart(productName: string) {
-    const slug = productName.toLowerCase().replace(/\s+/g, '-');
-    await this.page.getByTestId(`add-to-cart-${slug}`).click();
+  async addToCart(product: Product) {
+    await this.page.getByTestId(`add-to-cart-${product.slug}`).click();
   }
 
-  async removeFromCart(productName: string) {
-    const slug = productName.toLowerCase().replace(/\s+/g, '-');
-    await this.page.getByTestId(`remove-${slug}`).click();
+  async removeFromCart(product: Product) {
+    await this.page.getByTestId(`remove-${product.slug}`).click();
   }
 
   async goToCart() {

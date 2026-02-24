@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
+import type { Product } from '@data/products';
 
 export class CartPage {
-  // Locators exposed for test flexibility
   readonly checkoutButton: Locator;
   readonly continueShoppingButton: Locator;
   readonly cartItems: Locator;
@@ -26,9 +26,8 @@ export class CartPage {
     return this.cartItemNames.allTextContents();
   }
 
-  async removeItem(productName: string) {
-    const slug = productName.toLowerCase().replace(/\s+/g, '-');
-    await this.page.getByTestId(`remove-${slug}`).click();
+  async removeItem(product: Product) {
+    await this.page.getByTestId(`remove-${product.slug}`).click();
   }
 
   async removeItemByIndex(index: number) {
@@ -36,41 +35,38 @@ export class CartPage {
     await removeButtons.nth(index).click();
   }
 
-  async getItemPrice(productName: string): Promise<string> {
+  async getItemPrice(product: Product): Promise<string> {
     const item = this.cartItems.filter({
-      has: this.cartItemNames.filter({ hasText: productName })
+      has: this.cartItemNames.filter({ hasText: product.name })
     });
     return item.getByTestId('inventory-item-price').textContent() || '';
   }
 
-  // Meaningful action: proceed through entire checkout initiation flow
   async proceedToCheckout() {
     await this.checkoutButton.click();
     await expect(this.page).toHaveURL(/checkout-step-one/);
   }
 
-  // Meaningful action: return to products and verify we're there
   async returnToProducts() {
     await this.continueShoppingButton.click();
     await expect(this.page).toHaveURL(/inventory/);
   }
 
-  // Assertions
   async assertLoaded() {
     await expect(this.page).toHaveURL(/cart/);
     await expect(this.page.getByTestId('title')).toHaveText('Your Cart');
   }
 
-  async assertItemInCart(productName: string) {
+  async assertItemInCart(product: Product) {
     const item = this.cartItems.filter({
-      has: this.cartItemNames.filter({ hasText: productName })
+      has: this.cartItemNames.filter({ hasText: product.name })
     });
     await expect(item).toBeVisible();
   }
 
-  async assertItemNotInCart(productName: string) {
+  async assertItemNotInCart(product: Product) {
     const item = this.cartItems.filter({
-      has: this.cartItemNames.filter({ hasText: productName })
+      has: this.cartItemNames.filter({ hasText: product.name })
     });
     await expect(item).toHaveCount(0);
   }
