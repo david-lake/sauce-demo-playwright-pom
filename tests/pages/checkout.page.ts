@@ -1,30 +1,17 @@
 import { Page, Locator, expect } from '@playwright/test';
 
 export class CheckoutPage {
-  readonly firstNameInput: Locator;
-  readonly lastNameInput: Locator;
-  readonly postalCodeInput: Locator;
+  // Only expose locators used in tests or multiple methods
   readonly continueButton: Locator;
-  readonly cancelButton: Locator;
-  readonly finishButton: Locator;
-  readonly errorMessage: Locator;
-  readonly itemTotal: Locator;
 
   constructor(private page: Page) {
-    this.firstNameInput = this.page.getByTestId('firstName');
-    this.lastNameInput = this.page.getByTestId('lastName');
-    this.postalCodeInput = this.page.getByTestId('postalCode');
     this.continueButton = this.page.getByTestId('continue');
-    this.cancelButton = this.page.getByTestId('cancel');
-    this.finishButton = this.page.getByTestId('finish');
-    this.errorMessage = this.page.getByTestId('error');
-    this.itemTotal = this.page.getByTestId('subtotal-label');
   }
 
   async fillShippingInfo(firstName: string, lastName: string, postalCode: string) {
-    await this.firstNameInput.fill(firstName);
-    await this.lastNameInput.fill(lastName);
-    await this.postalCodeInput.fill(postalCode);
+    await this.page.getByTestId('firstName').fill(firstName);
+    await this.page.getByTestId('lastName').fill(lastName);
+    await this.page.getByTestId('postalCode').fill(postalCode);
   }
 
   async proceedToReview() {
@@ -33,22 +20,18 @@ export class CheckoutPage {
   }
 
   async completeOrder() {
-    await this.finishButton.click();
+    await this.page.getByTestId('finish').click();
     await expect(this.page).toHaveURL(/checkout-complete/);
   }
 
   async cancelCheckout() {
-    await this.cancelButton.click();
+    await this.page.getByTestId('cancel').click();
     await expect(this.page).toHaveURL(/cart/);
   }
 
   async assertLoaded() {
     await expect(this.page).toHaveURL(/checkout-step-one/);
-    await expect(this.firstNameInput).toBeVisible();
-  }
-
-  async assertOnReviewStep() {
-    await expect(this.page).toHaveURL(/checkout-step-two/);
+    await expect(this.page.getByTestId('firstName')).toBeVisible();
   }
 
   async assertOrderComplete() {
@@ -57,11 +40,11 @@ export class CheckoutPage {
   }
 
   async assertErrorVisible(expectedMessage: string) {
-    await expect(this.errorMessage).toBeVisible();
-    await expect(this.errorMessage).toHaveText(expectedMessage);
+    await expect(this.page.getByTestId('error')).toBeVisible();
+    await expect(this.page.getByTestId('error')).toHaveText(expectedMessage);
   }
 
   async assertItemTotal(expectedTotal: string) {
-    await expect(this.itemTotal).toContainText(expectedTotal);
+    await expect(this.page.getByTestId('subtotal-label')).toContainText(expectedTotal);
   }
 }
