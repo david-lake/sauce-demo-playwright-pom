@@ -1,9 +1,7 @@
-name: Playwright Tests
+name: Continuous Deployment - Playwright Chromium & Firefox
 
 on:
   push:
-    branches: [main]
-  pull_request:
     branches: [main]
 
 jobs:
@@ -20,17 +18,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Install dependencies
         run: sudo apt-get update
 
       - name: Install Playwright Browsers
         run: npx playwright install
 
-      - name: Run Playwright tests
-        run: npx playwright test --project=chromium --reporter=list
-
-
-      - name: Run Playwright tests
-        run: npx playwright test --project=chromium --reporter=list
+      - name: Run Playwright tests (Chromium & Firefox)
+        run: npx playwright test --project=chromium,firefox --reporter=list
