@@ -18,7 +18,9 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: sudo apt-get update
+        run: |
+          sudo apt-get update
+          npm install
 
       - name: Install Playwright Browsers
         run: npx playwright install
