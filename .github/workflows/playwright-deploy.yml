@@ -21,9 +21,7 @@ jobs:
         run: |
           sudo apt-get update
           npm install
-
-      - name: Install Playwright Browsers
-        run: npx playwright install
+          npx playwright install
 
       - name: Run Playwright tests (Chromium & Firefox)
         run: npx playwright test --project=chromium,firefox --reporter=list
