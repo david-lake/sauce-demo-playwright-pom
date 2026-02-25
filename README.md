@@ -49,6 +49,9 @@ tests/
 ### Page Object Model (POM)
 - Each page has a dedicated class encapsulating selectors and actions
 - Pages expose semantic methods (`addToCart()`, `proceedToCheckout()`) not raw interactions
+- Promote meaningful methods over thin wrappers that add little value
+- Inline locators by default; only abstract locators once duplication appears
+- Page Objects hold implementation details so tests can show user intent
 - Promotes reuse and makes tests readable as business flows
 
 ### Semantic Locators
