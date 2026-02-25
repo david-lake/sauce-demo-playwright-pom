@@ -22,6 +22,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install missing dependencies for WebKit
+        run: sudo apt-get install -y libgtk-3-0 libx11-xcb1 libxcb-dri3-0 libdrm2 libgbm1 libasound2 libpangocairo-1.0-0 libxcomposite1 libxcursor1 libxdamage1 libxfixes3 libxi6 libxrandr2 libxshmfence1 libnss3 libxtst6
+
       - name: Install Playwright Browsers
         run: npx playwright install
 
