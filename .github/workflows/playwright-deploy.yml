@@ -24,4 +24,4 @@ jobs:
           npx playwright install
 
       - name: Run Playwright tests (Chromium & Firefox)
-        run: npx playwright test --project=chromium,firefox --reporter=list
+        run: npx playwright test --reporter=list
