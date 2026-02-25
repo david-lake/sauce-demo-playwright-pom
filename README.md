@@ -58,11 +58,11 @@ tests/
 Prefer user-facing attributes over brittle CSS selectors:
 
 ```typescript
-// ✅ Good: resilient to layout changes
+// [32m[1m[32m[1m[32m[1m[32m[1m✅ Good[0m: resilient to layout changes
 await page.getByRole('button', { name: 'Checkout' }).click();
 await page.getByPlaceholder('First Name').fill('John');
 
-// ❌ Avoid: breaks when class names change
+// [31m[1m[31m[1m[31m[1m[31m[1m❌ Avoid[0m: breaks when class names change
 await page.click('.checkout-button');
 ```
 
@@ -83,10 +83,13 @@ await page.click('.checkout-button');
 
 GitHub Actions workflow runs tests on every push and pull request.
 
+![GitHub Actions passing workflow run](./github_actions_pass.png)
+_CI run showing all Playwright tests passing successfully on GitHub Actions._
+
 ## Tech Stack
 
-- [Playwright](https://playwright.dev/) — Modern end-to-end testing
-- [TypeScript](https://www.typescriptlang.org/) — Type safety
+- [Playwright](https://playwright.dev/) [32m[1m— Modern end-to-end testing[0m
+- [TypeScript](https://www.typescriptlang.org/) [32m[1m— Type safety[0m
 
 ## Why Playwright?
 
