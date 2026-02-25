@@ -1,0 +1,27 @@
+name: Continuous Deployment - Playwright Chromium & Firefox
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: sudo apt-get update
+
+      - name: Install Playwright Browsers
+        run: npx playwright install
+
+      - name: Run Playwright tests (Chromium & Firefox)
+        run: npx playwright test --project=chromium,firefox --reporter=list
