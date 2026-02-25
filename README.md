@@ -67,7 +67,7 @@ await page.click('.checkout-button');
 ```
 
 ### Test Data Management
-- Externalized test data in `tests/data/`
+- Externalised test data in `tests/data/`
 - Type-safe data structures for users and products
 - Easy to extend for new test scenarios
 
@@ -82,6 +82,10 @@ await page.click('.checkout-button');
 ## CI/CD
 
 GitHub Actions workflow runs tests on every push and pull request.
+
+CI run showing all Playwright tests passing successfully on GitHub Actions.
+
+<img width="1186" height="1032" alt="github_actions_pass" src="https://github.com/user-attachments/assets/4196ca6b-998f-45d5-9608-859c7de83856" />
 
 ## Tech Stack
 
