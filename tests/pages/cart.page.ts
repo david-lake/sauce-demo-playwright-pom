@@ -39,7 +39,7 @@ export class CartPage {
     const item = this.cartItems.filter({
       has: this.cartItemNames.filter({ hasText: product.name })
     });
-    return item.getByTestId('inventory-item-price').textContent() || '';
+    return (await item.getByTestId('inventory-item-price').textContent()) || '';
   }
 
   async proceedToCheckout() {
