@@ -47,7 +47,7 @@ tests/
 ## Testing Approach
 
 ### Page Object Model (POM)
-- Each page has a dedicated class encapsulating selectors and actions
+- Each page has a dedicated class encapsulating selectors, actions and assertions
 - Pages expose semantic methods (`addToCart()`, `proceedToCheckout()`) not raw interactions
 - Promote meaningful methods over thin wrappers that add little value
 - Inline locators by default; only abstract locators once duplication appears
@@ -87,8 +87,6 @@ GitHub Actions workflow runs tests on every push and pull request.
 
 - [Playwright](https://playwright.dev/) — Modern end-to-end testing
 - [TypeScript](https://www.typescriptlang.org/) — Type safety
-- Page Object Model pattern
-- Path aliases (`@data/*`, `@pages/*`, `@fixtures/*`)
 
 ## Why Playwright?
 
@@ -97,7 +95,3 @@ GitHub Actions workflow runs tests on every push and pull request.
 - **Codegen**: Generate tests by recording user interactions
 - **Cross-browser**: Chrome, Firefox, WebKit support out of the box
 - **TypeScript-first**: Built-in type definitions
-
-## License
-
-MIT
