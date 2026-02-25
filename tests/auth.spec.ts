@@ -1,11 +1,7 @@
 import { test } from '@fixtures/app.fixture';
 import { users } from '@data/users';
 
-import { test } from '@fixtures/app.fixture';
-import { users } from '@data/users';
-
-test.describe('Authentication tests', () => {
-
+test.describe('Authentication', () => {
   test('standard user can login', async ({ app }) => {
     await app.login.visit();
     await app.login.loginAs(users.standard);
@@ -18,5 +14,4 @@ test.describe('Authentication tests', () => {
     await app.login.assertLoaded();
     await app.login.assertError();
   });
-
 });
